@@ -10,18 +10,29 @@
  * @param {string} t
  * @return {boolean}
  */
+// 34/34 cases passed (72 ms)
+// Your runtime beats 71.69 % of javascript submissions
+// Your memory usage beats 100 % of javascript submissions (35 MB)
 var isAnagram = function(s, t) {
-    let arr_1 = {}
-    let arr_2 = {}
+    let obj_s = {}
+    let obj_t = {}
 
     Array.prototype.forEach.call(s, (sletter)=>{
-        sletter in arr_1 ? arr_1[sletter]++ : arr_1[sletter]=1
+        sletter in obj_s ? obj_s[sletter]++ : obj_s[sletter]=1
     })
     Array.prototype.forEach.call(t, (tletter)=>{
-        tletter in arr_2 ? arr_2[tletter]++ : arr_2[tletter]=1
+        tletter in obj_t ? obj_t[tletter]++ : obj_t[tletter]=1
     })
-    console.log(_.isEqual(arr_1, arr_2))
-    return(_.isEqual(arr_1, arr_2))
+    return(_.isEqual(obj_s, obj_t))
 };
+
+// 34/34 cases passed (96 ms)
+// runtime beats 42.15 %
+// memory usage beats 30.61 % (38.3 MB)
+// var isAnagram = function(s, t) {
+//     let s_dup = s.split('').sort().join('')
+//     let t_dup = t.split('').sort().join('')
+//     return s_dup === t_dup
+// }
 // @lc code=end
 
