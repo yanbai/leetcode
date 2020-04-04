@@ -24,4 +24,3 @@ var countSubstrings = function(s) {
     return result
 };
 // @lc code=end
-
