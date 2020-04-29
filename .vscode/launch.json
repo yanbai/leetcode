@@ -2,7 +2,15 @@
     "version": "0.2.0",  
     "configurations": 
     [  
-
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch node Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}"
+        },
         {
             "name": "C++", // 配置名称，将会在启动配置的下拉菜单中显示  
             "type": "cppdbg",       // 配置类型，这里只能为cppdbg  
