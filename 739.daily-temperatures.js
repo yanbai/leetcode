@@ -32,15 +32,17 @@ var dailyTemperatures = function(T) {
 
 // 2. monotonous increasing stack
 // https://www.jianshu.com/p/302647198b89
+// https://leetcode-cn.com/problems/daily-temperatures/solution/cheng-xu-yuan-de-zi-wo-xiu-yang-739-daily-temperat/
 // related: 907. Sum of Subarray Minimums
 // 975. Odd Even Jump
 // 37/37 cases passed (152 ms)
 // Your runtime beats 62.59 % of javascript submissions
 // Your memory usage beats 11.11 % of javascript submissions (48.4 MB)
 var dailyTemperatures = function(T) {
+    let { length } = T
     let stack = []
-    let res = new Array(T.length).fill(0)
-    for(let i=0, l=T.length; i<l; i++) {
+    let res = new Array(length).fill(0)
+    for(let i=0, l=length; i<l; i++) {
         if(!stack.length) {
             stack.push([i, T[i]])
         } else {
