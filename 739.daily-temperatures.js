@@ -9,6 +9,10 @@
  * @param {number[]} T
  * @return {number[]}
  */
+// 1. brute force check
+// 37/37 cases passed (848 ms)
+// Your runtime beats 27.06 % of javascript submissions
+// Your memory usage beats 100 % of javascript submissions (41.9 MB)
 var dailyTemperatures = function(T) {
     // let matrics=[]
     let res = new Array(T.length).fill(0)
@@ -25,19 +29,35 @@ var dailyTemperatures = function(T) {
     // console.log(matrics)
     return res
 };
-console.time('testForEach')
-console.log(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
-console.timeEnd('testForEach')
 
-let arr = [3, 4, 2, 6, 4, 5, 2, 3]
-let res = []
-
-for (let i = 0; i < arr.length; i++) {
-    while (res.length && res[res.length - 1] < arr[i]) {
-        res.pop()
+// 2. monotonous increasing stack
+// https://www.jianshu.com/p/302647198b89
+// related: 907. Sum of Subarray Minimums
+// 975. Odd Even Jump
+// 37/37 cases passed (152 ms)
+// Your runtime beats 62.59 % of javascript submissions
+// Your memory usage beats 11.11 % of javascript submissions (48.4 MB)
+var dailyTemperatures = function(T) {
+    let stack = []
+    let res = new Array(T.length).fill(0)
+    for(let i=0, l=T.length; i<l; i++) {
+        if(!stack.length) {
+            stack.push([i, T[i]])
+        } else {
+            while(!!stack.length && T[i] > stack[stack.length-1][1]) {
+                let popupItem = stack.pop()
+                let index = popupItem[0]
+                let value = i-index
+                res[index] = value
+            }
+            stack.push([i, T[i]])
+        }
     }
-    res.push(arr[i])
+    return res
 }
-console.log(res)
+
+// console.time('testForEach')
+// console.log(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
+// console.timeEnd('testForEach')
 
 // @lc code=end
