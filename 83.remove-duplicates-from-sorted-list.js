@@ -17,19 +17,26 @@
  * @return {ListNode}
  */
 // runtime 10, memory 10
-var deleteDuplicates = function(head) {
-    let prev = head
-    let current = head
-    let temp = null
-    while(current!==null) {
-        if(current.val === prev.val) {
-            prev.next = current.next
-        } else {
-            prev = current
-        }
-        current = current.next
-    }
-    return head
-};
+// var deleteDuplicates = function(head) {
+//     let prev = head
+//     let current = head
+//     while(current!==null) {
+//         if(current.val === prev.val) {
+//             prev.next = current.next
+//         } else {
+//             prev = current
+//         }
+//         current = current.next
+//     }
+//     return head
+// };
+
+//runtime 45, memory 45 
+var deleteDuplicates = function(node) {
+    if(node === null || node.next === null) return node
+    node.next = deleteDuplicates(node.next)
+    node.next = node.val === node.next.val ? node.next.next : node.next
+    return node
+}
 // @lc code=end
 
