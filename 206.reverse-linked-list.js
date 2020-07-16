@@ -16,18 +16,28 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-// runtime unstable, from 13% ~ 45%
+// runtime unstable, from 13% ~ 65%
+// var reverseList = function(head) {
+//     let current = head
+//     let temp = null
+//     let reversed = null
+//     while(current !== null) {
+//         temp = current
+//         current = current.next
+//         temp.next = reversed
+//         reversed = temp
+//     }
+//     return reversed
+// };
+
 var reverseList = function(head) {
-    let current = head
-    let temp = null
-    let reversed = null
-    while(current !== null) {
-        temp = current
-        current = current.next
-        temp.next = reversed
-        reversed = temp
-    }
-    return reversed
+    if (!head || !head.next) return head;
+    let next = head.next; // next节点，反转后是最后一个节点
+    let reverseHead = reverseList(next);
+    head.next = null; // 裁减 head
+    next.next = head; // 尾接
+    return reverseHead;
 };
+
 // @lc code=end
 
