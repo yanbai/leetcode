@@ -9,22 +9,22 @@
  * @param {number} x
  * @return {boolean}
  */
-// 11509/11509 cases passed (472 ms)
-// Your runtime beats 5.28 % of javascript submissions
-// Your memory usage beats 5.17 % of javascript submissions (84.7 MB)
 var isPalindrome = function(x) {
-    if (x===0) return true
-    if (x<0 || x%10 === 0) return false
-
+    if(x === 0)
+        return true
+    if(x<0)
+        return false
+    if(x%10 === 0)
+        return false
+    
+    let left = x
     let right = 0
-
-    while (x > right) {
-        right = right * 10 + x % 10
-        x = Math.floor(x/10)
-        console.log(x)
-        console.log(right)
+    while(left > right) {
+        let endNumber = left % 10
+        left = Math.floor(left / 10)
+        right = right * 10 + endNumber
     }
-    return x === right || x === Math.floor(right/10)
+    return left === right || Math.floor(right/10) === left
 };
-
+let res = isPalindrome(10)
 // @lc code=end

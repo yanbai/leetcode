@@ -71,29 +71,22 @@
 // Your runtime beats 36.7 % of javascript submissions
 // Your memory usage beats 13.33 % of javascript submissions (35.3 MB)
 var isValid = function(s) {
-    let mapping = {
+    let stack = []
+    let mappings = {
         ')': '(',
         ']': '[',
         '}': '{'
     }
-
-    let left_regexp = /[\(\[\{]/
-    let right_regexp = /[\)\]\}]/
-
-    let left = []
-    // let right = []
-    for(c of s) {
-        if(left_regexp.test(c)) {
-            left.push(c)
-        } else if(right_regexp.test(c)) {
-            if(left[left.length-1] === mapping[c]) {
-                left.pop()
-            } else {
-                return false
-            }
+    for(let i=0, l=s.length; i<l; i++) {
+        if(s[i] === '(' || s[i] === '[' || s[i] === '{')
+            stack.push(s[i])
+        if(s[i] === ')' || s[i] === ']' || s[i] === '}') {
+            let topItem = stack.pop()
+            if(topItem !== mappings[s[i]]) return false
         }
     }
-    return left.length === 0
+    if(stack.length !== 0) return false
+    return true
 };
 // @lc code=end
 

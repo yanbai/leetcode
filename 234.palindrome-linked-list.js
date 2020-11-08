@@ -30,41 +30,45 @@
 // run time unstable
 // from 20%~80%
 var isPalindrome = function(head) {
-    let current = head
-    let temp = null
-    let mid = null
-    let slow = current
-    let fast = current
-    let reversed = null
-    if(current === null) 
-        return true
-    if(current !== null && current.next === null) 
-        return true
-    if(current.next.next === null) {
-        return current.val === current.next.val
+    if(!head || !head.next)
+        return head
+    let slow = head
+    let fast = head
+    let total = 0
+    let res = true
+    while(fast) {
+        fast = fast.next
+        total++
     }
-    while(fast !== null && fast.next !== null) {
-        // cache slow
-        temp = slow
-        // loop
-        slow = slow.next
-        fast = fast.next.next
-        // build reversed
-        temp.next = reversed
-        reversed = temp
+    fast = head
+    let middle = total%2===0 ? (total/2) : Math.ceil(total/2)
+    let index = 0
+    while(fast) {
+        if(index >= middle) {
+            if(slow.val !== fast.val) {
+                res = false
+                break
+            }
+            slow = slow.next
+        }
+        fast = fast.next
+        index++
     }
-    if(fast !== null) {
-        mid = slow.next
-    } else {
-        mid = slow
-    }
-    while(mid!==null) {
-        if(mid.val !== reversed.val) return false
-        mid = mid.next
-        reversed = reversed.next
-    }
-
-    return true
+    return res
 };
-// console.log(isPalindrome(a_1))
+
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+
+let a_1 = new ListNode(1)
+let b_1 = new ListNode(2)
+let c_1 = new ListNode(2)
+let d_1 = new ListNode(1)
+
+a_1.next = b_1
+b_1.next = c_1
+c_1.next = d_1
+console.log(isPalindrome(a_1))
 // @lc code=end

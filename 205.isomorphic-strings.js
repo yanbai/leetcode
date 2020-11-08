@@ -10,23 +10,32 @@
  * @param {string} t
  * @return {boolean}
  */
-// 30/30 cases passed (260 ms)
-// Your runtime beats 5.43 % of javascript submissions
-// Your memory usage beats 11.76 % of javascript submissions (41 MB)
-var isIsomorphic = function(s, t) {
-    if (s.length !== t.length) return false
-    return oneWayIsmorphic(s, t) && oneWayIsmorphic(t, s)
-};
-function oneWayIsmorphic(s, t) {
-    let ob = {}
-    for (let i=0, l=s.length; i<l; i++ ) {
-        if(!Object.keys(ob).includes(s[i])) {
-            ob[s[i]] = t[i]
+// 32/32 cases passed (260 ms)
+// Your runtime beats 98.96 % of javascript submissions
+// Your memory usage beats 87.66 % of javascript submissions (41 MB)
+function isIsomorphic(s, t) {
+    if(s.length !== t.length)
+        return false
+    let mapA = {}
+    let mapB = {}
+    for(let i=0, l=s.length; i<l; i++) {
+        let si = s[i]
+        let ti = t[i]
+        if(!mapA[si]) {
+            mapA[si] = ti
         } else {
-            if(ob[s[i]] !== t[i]) return false
+            if(mapA[si] !== ti)
+                return false
+        }
+        if(!mapB[ti]) {
+            mapB[ti] = si
+        } else {
+            if(mapB[ti] !== si)
+                return false
         }
     }
     return true
 }
+// let res = isIsomorphic('egg', 'add')
 // @lc code=end
 

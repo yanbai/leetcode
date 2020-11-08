@@ -10,7 +10,6 @@
  */
 var MyQueue = function() {
     this.data = []
-    this.helpArr = []
 };
 
 /**
@@ -19,7 +18,7 @@ var MyQueue = function() {
  * @return {void}
  */
 MyQueue.prototype.push = function(x) {
-    this.data.push(x)
+    this.data[this.data.length] = x
 };
 
 /**
@@ -27,15 +26,17 @@ MyQueue.prototype.push = function(x) {
  * @return {number}
  */
 MyQueue.prototype.pop = function() {
-    // return this.data.shift()
-    while(this.data.length!== 0) {
-        this.helpArr.push(this.data.pop())
+    let tempData = []
+
+    while(this.data.length!==0) {
+        let backItem = this.data.pop()
+        tempData.push(backItem)
     }
-    let ele = this.helpArr.pop()
-    while(this.helpArr.length!== 0) {
-        this.data.push(this.helpArr.pop())
+    let removedItem = tempData.pop()
+    while(tempData.length!==0) {
+        this.data.push(tempData.pop())
     }
-    return ele
+    return removedItem
 };
 
 /**
