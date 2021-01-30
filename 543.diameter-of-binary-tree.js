@@ -17,20 +17,20 @@
  * @param {TreeNode} root
  * @return {number}
  */
-// runtime 78, memory 10
-var diameterOfBinaryTree = function(root) {
-    let res = 0
-    function depth(node) {
-        if(!node)
-            return 0
-        let l = depth(node.left)
-        let r = depth(node.right)
-        if((l+r) > res)
-            res = l+r
-        return Math.max(l, r) + 1
-    }
-    depth(root)
-    return res
-};
+// Your runtime beats 13.4 % of javascript submissions
+// Your memory usage beats 14.45 % of javascript submissions (42.6 MB)
+function diameterOfBinaryTree(root) {
+  let max = 0
+  function depth(node) {
+    if(!node)
+      return 0
+    let [l, r] = [depth(node.left), depth(node.right)]
+    max = Math.max(l+r, max)
+    return Math.max(l, r) + 1
+  }
+  depth(root)
+  return max
+}
+
 // @lc code=end
 

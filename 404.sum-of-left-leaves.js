@@ -17,23 +17,42 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var sumOfLeftLeaves = function(root) {
-    if(!root) return 0;
-    if(root.left) {
-        if(isLeaf(root.left)) {
-            return root.left.val + sumOfLeftLeaves(root.right)
-        }else {
-            return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right)
-        }
-    } else {
-         return sumOfLeftLeaves(root.right)
+// var sumOfLeftLeaves = function(root) {
+//     if(!root) return 0;
+//     if(root.left) {
+//         if(isLeaf(root.left)) {
+//             return root.left.val + sumOfLeftLeaves(root.right)
+//         }else {
+//             return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right)
+//         }
+//     } else {
+//          return sumOfLeftLeaves(root.right)
+//     }
+
+// };
+
+// function isLeaf(node) {
+//     if(!node) return false
+//     if(!node.left && !node.right) return true
+// }
+
+function sumOfLeftLeaves(root) {
+  if(!root || (!root.left && !root.right))
+    return 0
+  let [res, queue] = [0, [root]]
+  while(queue.length) {
+    let count = queue.length
+    for(let i=0; i<count; i++) {
+      let temp = queue.shift()
+      if(temp.left && (!temp.left.left && !temp.left.right))
+        res+=temp.left.val
+      if(temp.left)
+        queue.push(temp.left)
+      if(temp.right)
+        queue.push(temp.right)
     }
-
-};
-
-function isLeaf(node) {
-    if(!node) return false
-    if(!node.left && !node.right) return true
+  }
+  return res
 }
 // @lc code=end
 

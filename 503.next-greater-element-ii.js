@@ -11,31 +11,37 @@
  */
 // refer to daily temperatures
 // m increasing stack
-// 224/224 cases passed (112 ms)
-// Your runtime beats 60.75 % of javascript submissions
-// Your memory usage beats 100 % of javascript submissions (42.5 MB)
-var nextGreaterElements = function(nums) {
-    let { length } = nums
-    let stack = []
-    let res = new Array(length).fill(-1)
-    for(let i=0; i<length*2; i++) {
-        let _i = i%length
-        if (!stack.length) {
-            stack.push([_i, nums[_i]])
-        } else {
-            while(!!stack.length && nums[_i] > stack[stack.length-1][1]) {
-                let popItem = stack.pop()
-                let index = popItem[0]
-                let value = nums[_i]
-                res[index] = value
-            }
-            if(i<length) {
-                stack.push([_i, nums[_i]])
-            }
-        }
+
+// Your runtime beats 5.5 % of javascript submissions
+// Your memory usage beats 100 % of javascript submissions (43.5 MB)
+// function nextGreaterElements(arr) {
+//   let res = new Array(arr.length).fill(-1)
+//   for(let i=0;i<2*arr.length; i++) {
+//     for(let j=i; j<2*arr.length; j++) {
+//       if(arr[j%arr.length]>arr[i%arr.length]) {
+//         res[i%arr.length] = arr[j%arr.length]
+//         break
+//       }
+//     }
+//   }
+//   return res
+// }
+
+// Your runtime beats 71 % of javascript submissions
+// Your memory usage beats 24 % of javascript submissions (45.6 MB)
+function nextGreaterElements(arr) {
+  const [res, stack] = [new Array(arr.length).fill(-1), []]
+  for(let i=0;i<2*arr.length; i++) {
+    while(stack.length && arr[i%arr.length] > stack[stack.length-1][0]) {
+      const [val, index] = stack.pop()
+      res[index] = arr[i%arr.length]
     }
-    return res
-};
+    if(i<arr.length) {
+      stack.push([arr[i], i])
+    }
+  }
+  return res
+}
 // @lc code=end
 
 console.log(nextGreaterElements([1,2,1]))

@@ -29,5 +29,27 @@ var findBottomLeftValue = function(root) {
     }
     return root.val
 };
+
+// Your runtime beats 5.19 % of javascript submissions
+// Your memory usage beats 75.32 % of javascript submissions (42.8 MB)
+// function findBottomLeftValue(root) {
+//   if(!root)
+//     return null
+//   let [res, queue] = [0, [root]]
+//   while(queue.length) {
+//     let count = queue.length
+//     for(let i=0; i<count; i++) {
+//       if(i===0)
+//         res = queue[i].val
+//       let temp = queue.shift()
+//       if(temp.left)
+//         queue.push(temp.left)
+//       if(temp.right)
+//         queue.push(temp.right)
+//     }
+//   }
+//   return res
+// }
+
 // @lc code=end
 

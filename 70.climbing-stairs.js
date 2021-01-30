@@ -9,16 +9,24 @@
  * @param {number} n
  * @return {number}
  */
+// function climbStairs(n) {
+//     let res
+//     if(n===1) {
+//         res = 1
+//     } else if(n===2) {
+//         res = 2
+//     } else {
+//         res = climbStairs(n-1) + climbStairs(n-2)
+//     }
+//     return res
+// }
+
 function climbStairs(n) {
-    let res
-    if(n===1) {
-        res = 1
-    } else if(n===2) {
-        res = 2
-    } else {
-        res = climbStairs(n-1) + climbStairs(n-2)
+    let mem = [1, 1, 2]
+    for(let i=3; i<=n; i++) {
+        mem[i] = mem[i-1] + mem[i-2]
     }
-    return res
+    return mem[n]
 }
 // var climbStairs = function(n) {
 //     const dp = [];

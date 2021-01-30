@@ -20,19 +20,37 @@
  * @return {TreeNode}
  */
 
-function lowestCommonAncestor(root, p, q) {
-    if(!root || root === p || root === q)
-        return root
-    let left = lowestCommonAncestor(root.left, p, q)
-    let right = lowestCommonAncestor(root.right, p, q)
-    if(!left) {
-        return right
-    } else if (!right) {
-        return left
-    } else {
-        return root
-    }
+
+// 27/27 cases passed (100 ms)
+// Your runtime beats 50.25 % of javascript submissions
+// Your memory usage beats 80.66 % of javascript submissions (48.4 MB)
+// lowestCommonAncestor is actually findPorQ
+// actually we have two ways, one is recursion, another is while(iterate)
+// recursion:
+function lowestCommonAncestor(node, p, q) {
+  if(node.val > p.val && node.val > q.val) {
+    return lowestCommonAncestor(node.left, p, q)
+  } else if(node.val < p.val && node.val < q.val) {
+    return lowestCommonAncestor(node.right, p, q)
+  } else {
+    return node
+  }
 }
+
+// iterate:
+// function  lowestCommonAncestor(node, p, q) {
+//   while(node) {
+//     if(node.val > p.val && node.val > q.val) {
+//       node = node.left
+//     } else if (node.val < p.val && node.val < q.val) {
+//       node = node.right
+//     } else {
+//       break
+//     }
+//   }
+//   return node
+// }
+
 
 // let bst = new BST()
 // bst.insert(3)
@@ -47,5 +65,6 @@ function lowestCommonAncestor(root, p, q) {
 
 // a = lowestCommonAncestor(bst.root, 2, 3)
 // console.log(a)
+
 // @lc code=end
 

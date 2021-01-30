@@ -70,30 +70,76 @@
 // 76/76 cases passed (60 ms)
 // Your runtime beats 36.7 % of javascript submissions
 // Your memory usage beats 13.33 % of javascript submissions (35.3 MB)
-var isValid = function(s) {
-    let mapping = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
-    }
+// var isValid = function(s) {
+//     let mapping = {
+//         ')': '(',
+//         ']': '[',
+//         '}': '{'
+//     }
 
-    let left_regexp = /[\(\[\{]/
-    let right_regexp = /[\)\]\}]/
+//     let left_regexp = /[\(\[\{]/
+//     let right_regexp = /[\)\]\}]/
 
-    let left = []
-    // let right = []
-    for(c of s) {
-        if(left_regexp.test(c)) {
-            left.push(c)
-        } else if(right_regexp.test(c)) {
-            if(left[left.length-1] === mapping[c]) {
-                left.pop()
-            } else {
-                return false
-            }
-        }
+//     let left = []
+//     // let right = []
+//     for(c of s) {
+//         if(left_regexp.test(c)) {
+//             left.push(c)
+//         } else if(right_regexp.test(c)) {
+//             if(left[left.length-1] === mapping[c]) {
+//                 left.pop()
+//             } else {
+//                 return false
+//             }
+//         }
+//     }
+//     return left.length === 0
+// };
+
+
+// function isValid(s) {
+//   let map = {
+//     ')': '(',
+//     ']': '[',
+//     '}': '{'
+//   }
+//   let stack = []
+//   for(c of s) {
+//     if(['(', '[', '{'].includes(c)) {
+//       stack.push(c)
+//     } else if([')', ']', '}'].includes(c)) {
+//       let top = stack.pop()
+//       if(top === map[c]) {
+//         continue
+//       } else {
+//         return false
+//       }
+//     }
+//   }
+//   return !stack.length ? true : false
+// }
+
+
+// Your runtime beats 95.94 % of javascript submissions
+// Your memory usage beats 14.33 % of javascript submissions (40.7 MB)
+function isValid(str) {
+  const [map, stack] = [{
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  }, []]
+  
+  for(let s of str) {
+    if(['(','[','{'].includes(s)) {
+      stack.push(s)
+    } else {
+      if(stack[stack.length-1] === map[s]) {
+        stack.pop()
+      } else {
+        return false
+      }
     }
-    return left.length === 0
-};
+  }
+  return stack.length ? false : true
+}
 // @lc code=end
-

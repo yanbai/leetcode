@@ -16,16 +16,15 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-function reverseList(node) {
-    if(!node || !node.next)
-        return node
-    let reversed
-    let next = node.next
-    reversed = reverseList(next)
-    next.next = node
-    node.next = null
-    return reversed
-}
+// function reverseList(node) {
+//     if(!node || !node.next)
+//         return node
+//     let [tail, next] = [null, node.next]
+//     tail = reverseList(next)
+//     next.next = node
+//     node.next = null
+//     return tail
+// }
 
 function ListNode(val) {
     this.val = val;
@@ -43,5 +42,18 @@ c_1.next = d_1
 d_1.next = e_1
 
 let res = reverseList(a_1)
+
+// function reverseList(node) {
+//   let [next, prev] = [null, null]
+//   while(node) {
+//     next = node.next
+//     node.next = prev
+//     prev = node
+//     node = next
+//   }
+//   return prev
+// }
+
+
 
 // @lc code=end

@@ -10,36 +10,34 @@
  * @param {number} target
  * @return {number[]}
  */
-// 29/29 cases passed (56 ms)
-// Your runtime beats 81.31 % of javascript submissions
-// Your memory usage beats 11.16 % of javascript submissions (36.3 MB)
-var twoSum = function(nums, target) {
-    let hash = new Map()
-    let res = []
-    for (let i=0,l=nums.length; i<l; i++) {
-        if (hash.has(target-nums[i])) {
-            let j = hash.get(target-nums[i])
-            res = [i, j]
-        } else {
-            hash.set(nums[i], i)
-        }
-    }
-    return res
-};
 
-// var twoSum = function(nums, target) {
-//     let hash = {}
-//     let res = []
-//     for (let i=0,l=nums.length; i<l; i++) {
-//         if (Object.keys(hash).includes(target-nums[i])) {
-//             let j = hash[target-nums[i]]
-//             res = [i, j]
-//         } else {
-//             hash[nums[i]] = i
-//         }
+// Your runtime beats 31.18 % of javascript submissions
+// Your memory usage beats 85.83 % of javascript submissions (38.6 MB)
+// function twoSum(nums, target) {
+//   for(let i=0; i<nums.length; i++) {
+//     for(let j=i+1; j<nums.length; j++) {
+//       if(nums[i] + nums[j] === target) {
+//         return [i, j]
+//       }
 //     }
-//     return res
-// };
+//   }
+// }
 
+// Your runtime beats 84.83 % of javascript submissions
+// Your memory usage beats 29.74 % of javascript submissions (39 MB)
+// new Map().has
+// Object.keys(hash).includes
+// key in
+
+function twoSum(nums, target) {
+  const map = {}
+  for(let i=0; i<nums.length; i++) {
+    const current = nums[i]
+    if((target-current) in map)
+      return [map[target-current], i]
+    map[current] = i
+  }
+}
+let res = twoSum([2,7,11,15], 9)
 // @lc code=end
 

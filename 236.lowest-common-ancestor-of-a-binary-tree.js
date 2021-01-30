@@ -18,13 +18,32 @@
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
-    if(root.val > p && root.val > q)
-        return (lowestCommonAncestor(root.left, p, q))
-    if(root.val < p && root.val < q)
-        return (lowestCommonAncestor(root.right, p, q))
-    return root
-};
+// 31/31 cases passed (96 ms)
+// Your runtime beats 74.14 % of javascript submissions
+// Your memory usage beats 42.21 % of javascript submissions (48.1 MB)
+// lowestCommonAncestor is actually findPorQ
 
+// var lowestCommonAncestor = function(node, p, q) {
+//   if(!node)
+//     return null
+//   if(node === p || node===q)
+//     return node
+  
+//   let left = lowestCommonAncestor(node.left, p, q)
+//   let right = lowestCommonAncestor(node.right, p, q)
+//   if(!left)
+//     return right
+//   if(!right)
+//     return left
+//   return node
+// };
+
+function lowestCommonAncestor(node, p, q) {
+  if(!node || node === p || node === q) 
+    return node
+  let left = lowestCommonAncestor(node.left, p, q)
+  let right = lowestCommonAncestor(node.right, p, q)
+  return !left ? right : !right ? left : node
+}
 // @lc code=end
 

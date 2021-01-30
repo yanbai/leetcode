@@ -59,5 +59,12 @@ var isSymmetric = function(root) {
 //         return true
 //     return isMirror(root.left, root.right)
 // };
+
+// 这是错误的做法
+// function isSymmetric(root) {
+//     if(!root || (!root.left && !root.right))
+//         return true
+//     return isSymmetric(root.left) = isSymmetric(root.right)
+// }
 // @lc code=end
 
