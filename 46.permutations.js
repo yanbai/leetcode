@@ -42,24 +42,44 @@
 //       dfs(nextNode, visited)
 //   }
 // }
+// function permute(nums) {
+//   let [res, visited] = [[], {}]
+//   function dfs(path) {
+//     if(path.length === nums.length) {
+//       res.push(path.slice())
+//       return
+//     }
+//     for(let n of nums) {
+//       if(visited[n])
+//         continue
+//       visited[n] = true
+//       path.push(n)
+//       dfs(path)
+//       visited[n] = false
+//       path.pop()
+//     }
+//   }
+//   dfs([])
+//   return res
+// }
 function permute(nums) {
-  let [res, visited] = [[], {}]
-  function dfs(path) {
+  const [res, visited] = [[], {}]
+  function recurse(path) {
     if(path.length === nums.length) {
       res.push(path.slice())
       return
     }
-    for(let n of nums) {
-      if(visited[n])
+    for(let i=0; i<nums.length; i++) {
+      if(visited[nums[i]])
         continue
-      visited[n] = true
-      path.push(n)
-      dfs(path)
-      visited[n] = false
+      visited[nums[i]] = true
+      path.push(nums[i])
+      recurse(path)
+      visited[nums[i]] = false
       path.pop()
     }
   }
-  dfs([])
+  recurse([])
   return res
 }
 
